@@ -12,7 +12,7 @@ module Sockeye
       self.secret_token   = secret_token
     end
 
-    def deliver(connection_identifiers:, payload:)
+    def deliver(identifiers:, payload:)
 
       # Pull out the class instance varialbe, since the `self` 
       # scope is different once inside a connection block
@@ -30,7 +30,14 @@ module Sockeye
           connection = WebSocket::Client::Simple.connect self.server_address
 
           connection.on :open do
-            connection.send({secret_token: secret_token, connection_identifiers: connection_identifiers, action: :deliver, payload: payload}.to_json)
+            connection.send(
+              { 
+                action:       :deliver, 
+                payload:      payload,
+                identifiers:  identifiers,
+                secret_token: secret_token
+              }.to_json
+            )
           end
 
           connection.on :message do |msg|
