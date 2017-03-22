@@ -20,7 +20,29 @@ Or install it yourself as:
 
 ## Usage
 
-Don't bother
+```ruby
+def on_message(message)
+  puts "message:"
+  puts message.inspect
+end
+
+def on_error(code)
+  puts "error:"
+  puts code.inspect
+end
+
+def on_close
+  puts "closed"
+end
+
+Sockeye::Client.new(
+  server_address: "ws://sockeye.local:8443", 
+  auth_token:     "THIS USER'S AUTH TOKEN", 
+  on_message:     Proc.new {|message| on_message(message)}, 
+  on_error:       Proc.new {|code| on_error(code)}, 
+  on_close:       Proc.new {on_close}
+).connect
+```
 
 ## Development
 
