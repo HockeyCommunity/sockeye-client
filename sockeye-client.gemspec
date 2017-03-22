@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jack Hayter"]
   spec.email         = ["jack@hockey-community.com"]
 
-  spec.summary       = "A small library to send data to a socket server for resending to connected users"
-  spec.description   = "This library is used internally at HC to send data to our socket server, for delivery to specific connected socket.io clients. The authenticity of send-requests is currently achieved through a simple shared secret."
+  spec.summary       = "Acts as a simple websocket client, designed for use with the sockeye-server."
+  spec.description   = "Uses websockets to communicate with a sockeye-server to receive messages that were pushed to it with sockeye-pusher"
   spec.homepage      = "https://github.com/HockeyCommunity/sockeye-client"
   spec.license       = "MIT"
 
@@ -23,5 +23,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "socket.io-client-simple"
+  spec.add_runtime_dependency 'websocket-eventmachine-client', '~> 1.2', '>= 1.2.0'
+
 end
