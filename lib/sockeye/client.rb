@@ -1,4 +1,3 @@
-require "sockeye/client/version"
 require 'json'
 require 'websocket-eventmachine-client'
 
